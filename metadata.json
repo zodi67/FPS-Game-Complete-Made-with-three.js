@@ -1,0 +1,8 @@
+{
+  "name": "Operation Iron Sight",
+  "description": "Photorealistic 3D body-cam tactical FPS featuring physically based procedural shaders, unified solid collision geometry, rigged combatants, and multi-sector raid operations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

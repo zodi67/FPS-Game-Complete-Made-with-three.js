@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      (function () {
+        var isExt = function (s) {
+          return (
+            typeof s === 'string' &&
+            (s.indexOf('chrome-extension://') !== -1 ||
+              s.indexOf('moz-extension://') !== -1 ||
+              s.indexOf('Failed to connect to MetaMask') !== -1)
+          );
+        };
+        window.addEventListener(
+          'error',
+          function (e) {
+            var stack = e.error && e.error.stack ? e.error.stack : '';
+            if (isExt(e.filename) || isExt(e.message) || isExt(stack)) {
+              e.preventDefault();
+              e.stopImmediatePropagation();
+            }
+          },
+          true,
+        );
+        window.addEventListener(
+          'unhandledrejection',
+          function (e) {
+            var r = e.reason;
+            var msg = r instanceof Error ? r.message + '\n' + (r.stack || '') : String(r || '');
+            if (isExt(msg)) {
+              e.preventDefault();
+              e.stopImmediatePropagation();
+            }
+          },
+          true,
+        );
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Operation Iron Sight — Body-Cam Tactical FPS</title>
+    <meta
+      name="description"
+      content="Photorealistic 3D body-cam tactical FPS with physically based shaders, solid collision physics, articulated combat rigs, and multi-sector operations."
+    />
+    <meta property="og:title" content="Operation Iron Sight — Body-Cam Tactical FPS" />
+    <meta
+      property="og:description"
+      content="Photorealistic 3D body-cam tactical FPS with physically based shaders, solid collision physics, articulated combat rigs, and multi-sector operations."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-[#090c10] text-slate-100 overflow-hidden select-none antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
